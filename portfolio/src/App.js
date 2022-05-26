@@ -1,42 +1,87 @@
-import React from 'react';
+import {
+	Animator,
+	ScrollContainer,
+	ScrollPage,
+	batch,
+	Fade,
+	FadeIn,
+	Move,
+	MoveOut,
+	Sticky,
+	StickyIn,
+	ZoomIn,
+} from 'react-scroll-motion';
 
 import { motion } from 'framer-motion';
 
-import './App.css';
+export default function App() {
+	const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
+	const FadeUp = batch(Fade(), Move(), Sticky());
 
-function Square({ xAnimation, yAnimation }) {
 	return (
-		<motion.div
-			animate={{ x: xAnimation, y: yAnimation }}
-			transition={{
-				repeat: Infinity,
-				repeatDelay: 1,
-				delay: 1,
-				x: { type: 'spring', stiffness: 100 },
-
-				default: { duration: 4 },
-			}}
-			style={{
-				backgroundColor: 'red',
-				height: '100px',
-				width: '100px',
-				borderRadius: '50%',
-			}}
-		></motion.div>
-	);
-}
-
-function App() {
-	return (
-		<div className="App">
-			<div className="square-container">
-				<Square xAnimation={[0, 200, 200, 0]} yAnimation={[0, 200, 200, 0]} />
-				<Square xAnimation={[0, -200, -75, 0]} yAnimation={[0, -200, -75, 0]} />
-				<Square xAnimation={[0, 300, 25, 0]} yAnimation={[0, 300, 25, 0]} />
-				<Square xAnimation={[0, 26, -77, 0]} yAnimation={[0, 26, -77, 0]} />
+		<ScrollContainer>
+			<div style={{ backgroundColor: 'white' }}>
+				<ScrollPage page={0}>
+					<Animator animation={batch(Fade(), Sticky(), MoveOut(0, -400))}>
+						<div className="text-container">
+							<h1 style={{ fontSize: '8em' }}>Heyo.</h1>
+							<p style={{ fontSize: '22px' }}>Providing nice websites.</p>
+						</div>
+						<div className="circle-container">
+							<motion.div
+								className="circle"
+								animate={{ x: [0, 200, 150, 0], y: [0, 200, 200, 0] }}
+								transition={{ repeat: Infinity, duration: 5 }}
+							></motion.div>
+							<motion.div
+								className="circle"
+								animate={{ x: [0, 26, 20, 0], y: [0, -23, 33, 0] }}
+								transition={{ repeat: Infinity, duration: 2 }}
+							></motion.div>
+							<motion.div
+								className="circle"
+								animate={{ x: [0, -400, -30, 0], y: [0, 11, 66, 0] }}
+								transition={{ repeat: Infinity, duration: 3 }}
+							></motion.div>
+							<motion.div
+								className="circle"
+								animate={{ x: [26, 99, 48, 60], y: [70, 200, -88, 82] }}
+								transition={{ repeat: Infinity, duration: 4 }}
+							></motion.div>
+						</div>
+					</Animator>
+				</ScrollPage>
 			</div>
-		</div>
+			<div style={{ color: 'white' }}>
+				<ScrollPage page={1}>
+					<Animator animation={ZoomInScrollOut}>
+						<h1
+							style={{
+								fontSize: '6em',
+							}}
+						>
+							I'm Charlito
+						</h1>
+						<p>A aspiring frontend developer</p>
+					</Animator>
+				</ScrollPage>
+			</div>
+
+			<ScrollPage page={3}>
+				<Animator animation={FadeUp}>
+					<span style={{ fontSize: '3.5em', color: '#ffff99' }}>Skills ?</span>
+				</Animator>
+			</ScrollPage>
+			<ScrollPage page={4}>
+				<Animator animation={FadeIn}>
+					<span style={{ fontSize: '2em', color: 'white' }}>Node Js</span>
+				</Animator>
+			</ScrollPage>
+			<ScrollPage page={5}>
+				<Animator animation={batch(Fade(), Sticky(), MoveOut(0, -50))}>
+					<span style={{ fontSize: '1.5em', color: '#db4dff' }}>Express</span>
+				</Animator>
+			</ScrollPage>
+		</ScrollContainer>
 	);
 }
-
-export default App;
