@@ -2,6 +2,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: 0;
+	cursor: none;
 	font-family: 'Poppins', sans-serif;
 }
 
@@ -17,15 +18,36 @@
 	border-radius: 50%;
 }
 
-.text-container {
-	position: relative;
-
-	margin-bottom: 10em;
-}
-
 .circle-container {
 	display: flex;
 	z-index: -1;
 	position: absolute;
 	top: 0;
+}
+
+.mouse {
+	border: 2px solid rgba(0, 0, 0);
+	height: 40px;
+	width: 25px;
+	border-radius: 0 0 25px 25px;
+	position: relative;
+}
+
+.wheel {
+	width: 10px;
+	height: 10px;
+	background-color: black;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.cursor {
+	background-color: #111;
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	pointer-events: none;
 }
